@@ -72,12 +72,9 @@ AutoMACE is designed to empower marketers, brands, and creators to rapidly gener
 - `.env.local` – API keys (not committed)
 
 ## 🧑‍💻 Author
-**Name:** [Your Name Here]  
-**Email:** [your.email@example.com]  
-**LinkedIn:** [Your LinkedIn Profile]  
-**GitHub:** [Your GitHub Profile]  
+**Name:** Rama Chandra Kashyap Mamidipalli 
+**Email:** kashyapmrc@gmail.com 
+**LinkedIn:** https://www.linkedin.com/in/kashyapmrc/ 
+**GitHub:** https://github.com/kashyap0729
 
----
 
-## 📝 License
-Apache-2.0

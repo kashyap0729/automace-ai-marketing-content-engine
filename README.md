@@ -73,8 +73,11 @@ AutoMACE is designed to empower marketers, brands, and creators to rapidly gener
 
 ## 🧑‍💻 Author
 **Name:** Rama Chandra Kashyap Mamidipalli 
+
 **Email:** kashyapmrc@gmail.com 
+
 **LinkedIn:** https://www.linkedin.com/in/kashyapmrc/ 
+
 **GitHub:** https://github.com/kashyap0729
 
 

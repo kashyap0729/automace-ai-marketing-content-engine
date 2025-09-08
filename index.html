@@ -32,7 +32,7 @@
           <p>Provide the core details and branding for your ad campaign.</p>
         </div>
         <form id="campaign-form">
-            <div class="form-grid"></div>
+          <div class="form-grid">
             <div class="form-group span-2">
               <label for="product-desc">Product Description</label>
               <textarea id="product-desc" name="product-desc" rows="4" placeholder="e.g., A smart coffee mug that keeps your drink at the perfect temperature for hours."></textarea>
@@ -42,12 +42,10 @@
               <input type="text" id="target-audience" name="target-audience" placeholder="e.g., Busy professionals, tech enthusiasts">
             </div>
             <div class="form-group">
-              <label for="platform">Platform</label>
-              <select id="platform" name="platform">
-                <option value="Instagram Reels">Instagram Reels</option>
-                <option value="TikTok">TikTok</option>
-                <option value="YouTube Shorts">YouTube Shorts</option>
-                <option value="Facebook Feed">Facebook Feed</option>
+              <label for="format">Format / Aspect Ratio</label>
+              <select id="format" name="format">
+                <option value="9:16">Vertical Video (9:16) - for Reels, TikTok, Shorts</option>
+                <option value="1:1">Square Video (1:1) - for Instagram/Facebook Feed</option>
               </select>
             </div>
             <div class="form-group">
@@ -55,15 +53,18 @@
               <input type="number" id="scenes-wanted" name="scenes-wanted" value="3" min="2" max="5">
             </div>
             <div class="form-group">
-              <label for="watermark-text">Watermark Text (Optional)</label>
-              <input type="text" id="watermark-text" name="watermark-text" placeholder="e.g., YourBrandName.com">
+                <label for="watermark-text">Watermark Text (Optional)</label>
+                <input type="text" id="watermark-text" name="watermark-text" placeholder="e.g., YourBrandName.com">
             </div>
              <div class="form-group">
               <label for="logo-file">Brand Logo (Required)</label>
               <input type="file" id="logo-file" name="logo-file" accept="image/png, image/jpeg">
             </div>
-            <!-- ElevenLabs API Key is now loaded from .env.local and not shown in the form -->
+            <div class="form-group">
+              <label for="eleven-api-key">ElevenLabs API Key (Required)</label>
+              <input type="password" id="eleven-api-key" name="eleven-api-key" placeholder="Enter your ElevenLabs API key">
             </div>
+          </div>
           <button type="submit" id="generate-plan-btn" class="primary-btn">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M440-120v-240h80v240h-80Zm40-320q-17 0-28.5-11.5T440-480q0-17 11.5-28.5T480-520q17 0 28.5 11.5T520-480q0 17-11.5 28.5T480-440Zm0 400Q319-40 209.5-150.5T100-480q0-161 109.5-270.5T480-860q161 0 270.5 109.5T860-480q0 161-109.5 270.5T480-40Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
             Generate Storyboard
@@ -77,24 +78,34 @@
             <p>Generate images, voiceovers, and videos for each scene. Please proceed in order.</p>
         </div>
         <div id="storyboard-container"></div>
+        <div id="post-copy-view" class="hidden">
+            <h3>🚀 Your Social Media Post</h3>
+            <div id="post-copy-content"></div>
+        </div>
         <div class="actions-footer">
             <button id="generate-all-images-btn" class="primary-btn">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5-23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm80-80h400v-160L510-600l-140 160-110-120Z"/></svg>
               1. Generate All Images
             </button>
+             <button id="generate-all-videos-btn" class="primary-btn" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Z"/></svg>
+              2. Generate All Videos
+            </button>
             <button id="generate-all-vo-btn" class="primary-btn" disabled>
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-400q-50 0-85-35t-35-85v-200q0-50 35-85t85-35q50 0 85 35t35 85v200q0 50-35 85t-85 35ZM320-320v-80h320v80H320Zm160 200q-83 0-141.5-58.5T280-320h80q0 50 35 85t85 35q50 0 85-35t35-85h80q0 83-58.5 141.5T480-120Z"/></svg>
-                2. Generate All Voiceovers
+                3. Generate All Voiceovers
             </button>
-            <button id="generate-all-videos-btn" class="primary-btn" disabled>
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Z"/></svg>
-              3. Generate All Videos
+            <button id="generate-post-copy-btn" class="primary-btn" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t27 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
+                4. Generate Post Copy
             </button>
-        </div>
-        <div class="actions-footer">
-             <button id="preview-btn" class="secondary-btn" disabled>
+            <button id="preview-btn" class="secondary-btn" disabled>
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg>
                 Preview Full Ad
+            </button>
+            <button id="download-btn" class="secondary-btn" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
+                Download Full Ad
             </button>
         </div>
       </section>

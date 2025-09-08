@@ -23,7 +23,6 @@ dist-ssr
 Thumbs.db
 *.cache
 *.mp4
-*.webm
 *.wav
 *.mp3
 /generated_assets/
